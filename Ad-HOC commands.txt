@@ -1,0 +1,30 @@
+[ansible@ip]$   ansible demo -a "ls" --------->a=argument
+
+[ansible@ip]$ ansible demo[0] -a “touch filezz” 
+ 
+[ansible@ip]$ ansible all –a “touch filek”  
+
+[ansible@ip]$ ansible demo –a “ls-al”  
+
+[ansible@ip]$ ansible demo –a “sudo yum install httpd -y” 
+
+[ansible@ip]$ ansible demo –ba “yum install httpd -y”  
+
+[ansible@ip]$ ansible demo –ba “yum remove httpd -y” 
+
+[ansible@ip]$ ansible all –a “touch abcd” 
+
+
+[ansible@ip]$ ansible demo –a “yum install httpd -y” failed 
+
+[ansible@ip]$ ansible demo –ba “yum install httpd -y” Installation done all nodes 
+
+[ansible@ip]$ which httpd ---check Installed files in all nodes 
+
+[ansible@ip]$ /usr/sbin/httpd --------output in all nodes 
+
+[ansible@ip]$ ansible anshu –a “sudo yum remove httpd -y” Uninstallation 
+
+[ansible@ip]$ which httpd No output all deleted 
+
+

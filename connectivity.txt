@@ -1,0 +1,26 @@
+[ .ssh] $ cd .. 
+
+[ansible] $ ansible all –-list-hosts check no of all nodes, hosts 
+hosts (2): 
+172.31.41.240 
+172.31.41.248 
+
+[ansible] $ ansible anshu –-list-hosts check nodes inside group=demo
+hosts (2): 
+172.31.41.240 
+172.31.41.248 
+
+[ansible] $ ansible demo[0] –-list-hosts 
+hosts (1): 
+172.31.41.240 
+
+[ansible] $ ansible demo[1] –-list-hosts 
+hosts (1): 
+172.31.41.248 
+
+[ansible] $ ansible demo[-1] –-list-hosts 
+hosts (1): 
+172.31.41.248 
+
+[ansible] $ ansible demo[3] –-list-host 
+[WARNING]: No host matched, nothing to do 

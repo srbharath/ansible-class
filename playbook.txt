@@ -1,0 +1,103 @@
+[ansible@Ip]$ Vi task.yml 
+
+--- #My Task Playbook
+- hosts: demo
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+          - name: install HTTPD on centos 7
+            action: yum name=httpd state=installed
+         
+
+
+----------------------------------------------------------------------------------------------------------
+
+[ansible@Ip]$ Vi vars.yml 
+
+--- #My variable Playbook
+- hosts: demo
+  user: ansible
+  become: yes
+  connection: ssh
+  vars:
+          pkgname: httpd
+  tasks:
+          - name: install HTTPD server on centos 7
+            action: yum name='{{pkgname}}' state=installed
+ 
+
+
+------------------------------------------------------------------------------------------------------------
+
+[ansible@Ip]$ Vi handlers.yml 
+
+--- #My handlers Playbook
+- hosts: demo
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+        - name: install HTTPD server on centos 7
+          action: yum name=httpd state=installed
+          notify: restart httpd
+  handlers:
+          - name: restart httpd
+            action: service name=httpd state=restarted
+
+
+-----------------------------------------------------------------------------------------------------------
+[ansible@Ip]$ Vi loops.yml 
+
+--- #My Loops Playbook
+- hosts: demo
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+          - name: add list of users in my nodes
+            user: name='{{item}}' state=present
+            with_items:
+                    - superman
+                    - batman
+                    - ironman
+                    - spiderman
+ 
+
+---------------------------------------------------------------------------------------------------------------
+
+[ansible@Ip]$ Vi condition.yml 
+
+--- #My Conditional Playbook apt-get=debian yum=RedHat
+- hosts: demo
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+          - name: install apache server for Debian family
+            command: apt-get -y install apache2
+            when: ansible_os_family == "Debian"
+          - name: install apache for RedHat
+            command: yum -y install httpd
+            when: ansible_os_family == "RedHat"
+ 
+
+
+
+-------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

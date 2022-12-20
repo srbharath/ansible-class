@@ -1,0 +1,35 @@
+[ansible@ip]$ ansible demo -b -m yum -a "pkg=httpd state=present"
+
+[ansible@ip]$ ansible demo –b –m user –a “name=shan” 
+
+[ansible@ip]$ ansible demo –b –m copy –a “src=fileA dest=/tmp” 
+
+
+Update package of installed httpd: 
+
+[ansible@ip]$ ansible demo –b –m yum –a “pkg=httpd state=latest” 
+[ansible@ip]$ which httpd 
+[ansible@ip]$ /usr/bin/httpd check in all nodes 
+
+Delete installed package: both nodes: 
+[ansible@ip]$ ansible demo –b –m yum –a “pkg=httpd state=absent” 
+[ansible@ip]$ sudo service httpd status Inactive 
+
+To start a service execute this command: 
+[ansible@ip]$ ansible demo –b –m service –a “name=httpd state=started” 
+[ansible@ip]$ ansible demo -b -m service -a "name=httpd state=reloaded"
+[ansible@ip]$ ansible demo -b -m service -a "name=httpd state=stopped"
+[ansible@ip]$ ansible demo -b -m service -a "name=httpd state=restarted"
+
+To create the user: 
+[ansible@ip]$ ansible demo –b –m user –a “name=shan” 
+
+To check the status of user: 
+[ansible@ip]$ cat /etc/passwd Check in all nodes you will get user shan at the bottem lines 
+
+To copy item from source to a Particular Node/destination: suppose only on last node [-1]. 
+[ansible@ip]$ touch fileXYZ 
+[ansible@ip]$ ansible demo[-1] –b –m copy –a “src=fileXYZ dest=/tmp” 
+
+To copy item from source to destination: for all nodes: 
+[ansible@ip]$ ansible demo –b –m copy –a “src=fileA dest=/tmp” 
