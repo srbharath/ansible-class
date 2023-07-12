@@ -1,0 +1,105 @@
+what is ansible
+ansible is an IAAC used for configuration management
+
+what is IAAC
+by using the code we are creating the infrastructure
+
+tools which will works as IAAC
+docker, ansible, cheif. puppet, terraform, saltstack
+
+what is configuration management
+to manage the tasks( insert, update, delete, create )
+
+2 types of configuration management
+1) push based configuration management --> ansible, saltstack
+2) pull based configuration management --> chef and puppet
+
+installation
+created 3 instances
+1--> master
+2 --> nodes
+
+master
+- installed ansible
+- add the inventry file and created a group
+  vi /etc/ansible/hosts
+      [demo]
+   pvt ip of node 1
+   pvt ip of node 2
+
+- the inventry is not enabled by default we need to enable it
+  vi /etc/ansible/ansible.cfg
+
+- added a user and set the passwd
+adduser ansible
+passwd ansible
+
+- provide the permission for the user,
+visudo
+
+ansible ALL=(ALL) NOPASSWD: ALL
+
+- enable the ssh connection
+vi /etc/ssh/sshd_config
+
+restart the service of sshd
+service sshd restart
+
+-----------------------------------\
+generate the ssh-keys and copy the ssh keys to the nodes
+ssh-keygen
+
+cd .ssh
+ ssh-copy-id ansible@<prt ip of node>
+
+nodes 
+
+- added a user and set the passwd
+adduser ansible
+passwd ansible
+
+- provide the permission for the user,
+visudo
+
+ansible ALL=(ALL) NOPASSWD: ALL
+
+- enable the ssh connection
+vi /etc/ssh/sshd_config
+
+restart the service of sshd
+service sshd restart
+======================================================================
+connectivity commands
+ansible all --lists-hosts
+ansible demo --lists-hosts
+ansible demo[1] --lists-hosts
+
+2 types of commands
+
+1) adhoc commands -> simple single line commands which is used to do quick functions and these commands does not have the idempotency
+2) module commands -> simple single line commands which is used to do quick functions and these commands have the idempotency
+
+1) adhoc commands
+ansible demo -a "ls"
+ansible demo -a "touch abc.txt"
+ansible demo -a " sudo yum install docker -y"
+
+2) module commands
+ansible demo -b -m yum -a "pkg=httpd" "state=present"
+
+playbooks
+playbooks are the configuration file which will be written in yaml language
+
+3 sections
+1) task
+2) target
+3) variable
+
+ex:
+demo playbook
+variable playbook
+handlers playbook
+loops playbook
+conditions playbook
+
+vaults 
