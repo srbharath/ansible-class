@@ -1,0 +1,31 @@
+provider "aws" {
+  access_key = "AKIAYB6PBVPHKVDS6NGU"
+  secret_key = "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"
+  region     = "us-east-1"
+}
+resource "aws_security_group" "abcd" {
+  name        = "web-node"
+  description = "Web Security Group"
+  vpc_id      = "vpc-0b811d59f83d68e75"
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "all"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "all"
+    cidr_blocks = ["0.0.0.0/0"]
+
+  }
+
+}
+resource "aws_instance" "terraform12" {
+  ami           = "ami-06b09bfacae1453cb"
+  instance_type = "t2.micro"
+  key_name      = "vir-prj"
+  security_groups = ["${aws_security_group.abcd.name}"]
+  count         = 2
+}

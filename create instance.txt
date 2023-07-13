@@ -1,0 +1,11 @@
+provider "aws" {
+  access_key = "AKIAYB6PBVPHKVDS6NGU"
+  secret_key = "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"
+  region     = "us-east-1"
+}
+resource "aws_instance" "terraform12" {
+  ami           = "ami-06b09bfacae1453cb"
+  instance_type = "t2.micro"
+  key_name      = "vir-prj"
+  count         = 2
+}
